@@ -151,7 +151,7 @@ extension WorkoutController {
 extension WorkoutController {
     
     @IBAction func playVideo(_ sender: UIButton) {
-        let video = NetworkService.gsReference.child("yavin4-videos/\(identifier!).m4")
+        let video = NetworkService.gsReference.child("yavin4-videos/\(identifier!).mp4")
         video.downloadURL { url, error in
             if let error = error {
                 let ac = Helper.createAlert(title: "Error Displaying Video", message: error.localizedDescription)
