@@ -60,7 +60,7 @@ extension HomeController {
 
         let layoutGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.60),
-            heightDimension: .estimated(350))
+            heightDimension: .fractionalHeight(0.50))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
 
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
@@ -98,7 +98,7 @@ extension HomeController {
 
         let layoutGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.93),
-            heightDimension: .estimated(200))
+            heightDimension: .estimated(200))  // unused
         let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
 
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
