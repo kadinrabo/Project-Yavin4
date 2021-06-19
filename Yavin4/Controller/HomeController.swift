@@ -19,6 +19,8 @@ import FirebaseFirestoreSwift
 
 class HomeController: UICollectionViewController {
 
+    @IBOutlet var upgradeButton: UIBarButtonItem!  // Upgrade button outlet for modifying text
+    @IBOutlet var favoriteButton: UIBarButtonItem!
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!  // Data source for configured cells
     var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()  // Empty snapshot
@@ -53,6 +55,7 @@ extension HomeController {
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Workout") as? WorkoutController {
                 vc.workoutIdentifier = identifier
                 vc.title = title
+                vc.downButton.tintColor = UIColor.label
                 self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
             } else {
                 let ac = Helper.createAlert(title: "Error", message: "Error performing request. [2]")
@@ -72,13 +75,59 @@ extension HomeController {
 }
 
 // ######################################################
+//MARK: BUTTON DELEGATE METHOD(S)
+// ######################################################
+
+extension HomeController {
+    
+    func updateNavBarButtons() {
+        let userRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)
+        
+        userRef.getDocument { document, error in
+            let result = Result {
+              try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if data != nil {
+                    if !data!.paid {
+                        self.upgradeButton.title = "Upgrade"
+                        self.upgradeButton.tintColor = UIColor.systemBlue
+                        self.upgradeButton.isEnabled = true
+                        
+                        self.favoriteButton.tintColor = UIColor.clear
+                        self.favoriteButton.isEnabled = false
+                    } else if data!.paid {
+                        self.upgradeButton.title = "Manage"
+                        self.upgradeButton.tintColor = UIColor.label
+                        self.upgradeButton.isEnabled = true
+                        
+                        self.favoriteButton.tintColor = UIColor.label
+                        self.favoriteButton.isEnabled = true
+                    }
+                } else {
+                    if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                        vc.errorText = "updateNavBarButtons() @ HomeController.swift in else data nil block"
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "updateNavBarButtons() @ HomeController.swift in failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+}
+
+// ######################################################
 //MARK: DATA DELEGATE METHOD(S)
 // ######################################################
 
 extension HomeController {
     
-    private func sortForYouSection() {  // Sort all workouts for the for you section.
-        let searchData = NetworkService.SearchSections[0].data!  // Gets an Item array with all available workouts.
+    private func sortForYouSection(with searchData: [Item], forYouPosition: Int) {  // Sort all workouts for the for you section.
         Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).addSnapshotListener { document, error in  // Gets the user's document with a snapshot listener, for realtime updates
             var dssString: String! = ""  // Holds rehab stage based on dss
             var dss: Int = 0  // Days since surgery
@@ -99,9 +148,9 @@ extension HomeController {
                         }
                         return
                     }
-                    guard let items = Helper.getThreeItems(searchData: searchData, dssString: dssString) else {  // Gets three random items with the filter of the rehab stage
+                    guard let items = Helper.getForYouItems(searchData: searchData, dssString: dssString) else {  // Gets three random items with the filter of the rehab stage
                         if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
-                            vc.errorText = "sortForYouSection() @ HomeController.swift in guard let block for getThreeItems"
+                            vc.errorText = "sortForYouSection() @ HomeController.swift in guard let block for Helper.getForYouItems"
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                         return
@@ -111,8 +160,8 @@ extension HomeController {
                     for section in self.sections {
                         self.snapshot.appendItems(section.data!, toSection: section)  // Upload items to snapshot
                     }
-                    self.snapshot.deleteItems(self.sections[1].data!)  // Possibly redundant, but this clears any items in the second section to be filled
-                    self.snapshot.appendItems(items, toSection: self.sections[1])  // Add the newly acquired items in the guard block to the second section of the snapshot
+                    self.snapshot.deleteItems(self.sections[forYouPosition].data!)  // Possibly redundant, but this clears any items in the second section to be filled
+                    self.snapshot.appendItems(items, toSection: self.sections[forYouPosition])  // Add the newly acquired items in the guard block to the second section of the snapshot
                     self.dataSource?.apply(self.snapshot, animatingDifferences: true)  // Apply the snapshot to the data source
                 } else {  // Should execute if the data object is nil.
                     if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
@@ -121,6 +170,46 @@ extension HomeController {
                     }
                 }
             case .failure(_):  // Run if firestore document -> User object conversion fails
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "sortForYouSection() @ HomeController.swift in .failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+    
+    func networkService() {
+        Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).addSnapshotListener { document, error in
+            let result = Result {
+                try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if let data = data {
+                    if !data.paid {
+                        self.sections = NetworkService.FreeControllers.HomeController
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [2]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.sortForYouSection(with: NetworkService.FreeControllers.SearchController[0].data!, forYouPosition: 0)
+                    } else if data.paid {
+                        self.sections = NetworkService.HomeSections
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [3]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.sortForYouSection(with: NetworkService.SearchSections[0].data!, forYouPosition: 1)
+                    } else {
+                        if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                            vc.errorText = "continueToHome() @ HomeController.swift in else block of success case"
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
+            case .failure(_):
                 if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
                     vc.errorText = "sortForYouSection() @ HomeController.swift in .failure case block"
                     self.navigationController?.pushViewController(vc, animated: true)
@@ -152,16 +241,15 @@ extension HomeController {
         // Configure View
         title = "Home"
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.favoriteButton.tintColor = UIColor.clear
+        self.favoriteButton.isEnabled = false
+        self.upgradeButton.tintColor = UIColor.clear
+        self.upgradeButton.isEnabled = false
         configureHierarchy()  // Configures barebone layout
         createDataSource()  // Configures the different sections by registering cells
+        updateNavBarButtons()  // Change upgrade button to "Manage" if user paid. Only changes in app relaunch
         
         // Network Service
-        sections = NetworkService.HomeSections
-        if sections.isEmpty {
-            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [1]")
-            present(ac, animated: true)
-            return
-        }
-        sortForYouSection()  // gets For You items and applies the new sections to the datasource
+        networkService()
     }
 }
