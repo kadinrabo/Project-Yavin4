@@ -1,8 +1,15 @@
+# :camera: Screenshots
+
+<img src="https://drive.google.com/uc?export=view&id=12T2aVxEXBBsI1H6mqiEOx5DLmKukrr2g" height=300> <img src="https://drive.google.com/uc?export=view&id=1D5suruhjwoEAScFb-k3RrRid0LvlP7iO" height=300> <img src="https://drive.google.com/uc?export=view&id=1WEVzSiJ9IFEvCTm6k28wOS-UAOroatPq" height=300>
+
+<img src="https://drive.google.com/uc?export=view&id=1wyGUshlzZA3yqM2y54Q1JZgh_pOmkdXS" height=300> <img src="https://drive.google.com/uc?export=view&id=1_NCdn6uUTqhIVY01i2rxAjVpBXCmU_Wr" height=300> <img src="https://drive.google.com/uc?export=view&id=1YOIFJzPynHHwM7JOtnm8JYJvDAtVYycu" height=300>
+
+<img src="https://drive.google.com/uc?export=view&id=1MYxcH8gBZnvEtQJDNkalt5RoO5aNyVcW" height=300> <img src="https://drive.google.com/uc?export=view&id=13SM-6iys1REtIxvDo2ooAMR8TYQmHD9B" height=300> <img src="https://drive.google.com/uc?export=view&id=1sd_uZr7A9AqjrrdsErHOeDeqYALGnTgm" height=300>
+
+<img src="https://drive.google.com/uc?export=view&id=1HBeq0vakEB6V4Jz8INST5DIzj_NkZRxM" height=300> <img src="https://drive.google.com/uc?export=view&id=1y8NjpGWTcE7tsVln6zcLMIipaRmqeku1" height=300> <img src="https://drive.google.com/uc?export=view&id=1Ybi1GBASIga9Wj1Sm11VR6k2oYxocyR8" height=300> <img src="https://drive.google.com/uc?export=view&id=1nHe4Xo-ZrN39YtTUNroyicL1wT7cNq6J" height=300> <img src="https://drive.google.com/uc?export=view&id=1zuDlWXbDaIqSqfJiUDS_7G0t2ZF2m_4u" height=300>
+
+
 # :crystal_ball: Models
-
-### **Controllers** :arrow_right: **Sections** :arrow_right: **Items**
-
-### **Stages** :arrow_right: **Stage** :arrow_right: **Workout**
 
 #### **Section**
 
@@ -81,20 +88,6 @@ url | For articles in Resources section.
 [Model-View-Controller Architecture](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/MVC.html)
 
 [Image Caching with SD_WebImage](https://github.com/SDWebImage/SDWebImage)
-
-# :camera: Screenshots
-
-<img src="https://drive.google.com/uc?export=view&id=1ss1yXyyHdgmgIVYAZ7ScDQPr2gh8BnlI" height=1040> <img src="https://drive.google.com/uc?export=view&id=1bXjgxvTtRs6W7JrYTfHmwbe1dAmgje6P" height=1040>
-
-<img src="https://drive.google.com/uc?export=view&id=1pWevmaTly4BVD7S5J7JAZVVAs6FCiPTY" height=1040> <img src="https://drive.google.com/uc?export=view&id=11TsBpgoMLSfo5ciUziVcSnQrJht88JVS" height=1040>
-
-<img src="https://drive.google.com/uc?export=view&id=1hLdYlKitlMV7TRTLb2BDfks72qgsqeQW" height=1040> <img src="https://drive.google.com/uc?export=view&id=1UUEGHEn-jXl36wndHnfIhKtFKGu96N59" height=1040>
-
-<img src="https://drive.google.com/uc?export=view&id=1_nmLmUeT7w-ZbyFYmMK_KJR_EDwrTAUc" height=1040> <img src="https://drive.google.com/uc?export=view&id=1xZbL3QzbNH32TRaCMW7lPmBg9EAnSHjf" height=1040>
-
-<img src="https://drive.google.com/uc?export=view&id=1bYGyPgbXV2xaIjpVdp_YN6YVnQa8Yetw" height=1040> <img src="https://drive.google.com/uc?export=view&id=1Ad5KvDmtJRD6tie0TBL6DvA6GhgPOOr4" height=1040>
-
-<img src="https://drive.google.com/uc?export=view&id=1rXRJ5CD8tXdqlo7hvcjAotd4Ki_9RzvS" height=1040> <img src="https://drive.google.com/uc?export=view&id=1cEeD55CP9hLqqef-qiEFRtmAah56pbdF" height=1040>
 
 # :art: Layout Documentation & Notes
 
