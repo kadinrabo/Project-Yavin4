@@ -5,7 +5,6 @@
 //  Created by Kadin Rabo on 5/22/21.
 //
 
-import Foundation
 import Firebase
 import FirebaseStorage
 
@@ -32,6 +31,7 @@ class NetworkService {
     // ####################################################
     
     static let Yavin4Data = Bundle.main.decode(Controllers.self, from: "https://prototypes-5287e-default-rtdb.firebaseio.com/yavin4.json")
+    static let FreeControllers = Yavin4Data.FreeControllers
     static let HomeSections = Yavin4Data.HomeController
     static let StageSections = Yavin4Data.StageController
     static let SearchSections = Yavin4Data.SearchController
@@ -46,14 +46,37 @@ class NetworkService {
     
     static func getStageSections(with identifier: String) -> [Section]? {
         switch identifier {
-        case "Early-Stage":
-            return NetworkService.StageSections.EarlyStage
-        case "Mid-Stage":
-            return NetworkService.StageSections.MidStage
-        case "Late-Stage":
-            return NetworkService.StageSections.LateStage
-        case "More":
-            return NetworkService.StageSections.More
+        case "Weeks_0_2":
+            return NetworkService.StageSections.Weeks_0_2
+        case "Weeks_2_8":
+            return NetworkService.StageSections.Weeks_2_8
+        case "Weeks_8_12":
+            return NetworkService.StageSections.Weeks_8_12
+        case "Weeks_12_20":
+            return NetworkService.StageSections.Weeks_12_20
+        case "Weeks_20_32":
+            return NetworkService.StageSections.Weeks_20_32
+        case "Weeks_32_50":
+            return NetworkService.StageSections.Weeks_32_50
+        default:
+            return nil
+        }
+    }
+    
+    static func getFreeStageSections(with identifier: String) -> [Section]? {
+        switch identifier {
+        case "Weeks_0_2":
+            return NetworkService.FreeControllers.StageController.Weeks_0_2
+        case "Weeks_2_8":
+            return NetworkService.FreeControllers.StageController.Weeks_2_8
+        case "Weeks_8_12":
+            return NetworkService.FreeControllers.StageController.Weeks_8_12
+        case "Weeks_12_20":
+            return NetworkService.FreeControllers.StageController.Weeks_12_20
+        case "Weeks_20_32":
+            return NetworkService.FreeControllers.StageController.Weeks_20_32
+        case "Weeks_32_50":
+            return NetworkService.FreeControllers.StageController.Weeks_32_50
         default:
             return nil
         }
