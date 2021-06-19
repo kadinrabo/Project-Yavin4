@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 // ######################################################
@@ -14,6 +17,7 @@ import UIKit
 
 class SearchController: UICollectionViewController, UISearchResultsUpdating { // Adopts search protocol
     
+    @IBOutlet var favoriteButton: UIBarButtonItem!
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     var searchController = UISearchController(searchResultsController: nil) // Instantiates a search controller with no view controller. Because it will be embedded in the navigation bar
@@ -25,17 +29,14 @@ class SearchController: UICollectionViewController, UISearchResultsUpdating { //
         // Configure View
         title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.favoriteButton.tintColor = UIColor.clear
+        self.favoriteButton.isEnabled = false
         configureHierarchy()
         createDataSource()
+        updateNavBarButtons()
         
         // Network Service
-        sections = NetworkService.SearchSections
-        if sections.isEmpty {
-            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [18]")
-            present(ac, animated: true)
-            return
-        }
-        reloadSearchResults(with: sections, animatingDifferences: false)  // Reload search results
+        networkService()
     }
 }
 
@@ -64,13 +65,53 @@ extension SearchController {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Workout") as? WorkoutController {
             vc.workoutIdentifier = identifier
             vc.title = title
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.downButton.tintColor = UIColor.label
+            self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+            self.collectionView.deselectItem(at: indexPath, animated: true)
         } else {
             if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
                 vc.errorText = "didSelectItem() @ SearchController.swift in else block of WorkoutController instantiation"
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             return
+        }
+    }
+}
+
+// ######################################################
+//MARK: BUTTON DELEGATE METHOD(S)
+// ######################################################
+
+extension SearchController {
+    
+    func updateNavBarButtons() {
+        let userRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)
+        
+        userRef.getDocument { document, error in
+            let result = Result {
+              try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if data != nil {
+                    if !data!.paid {
+                        self.favoriteButton.tintColor = UIColor.clear
+                    } else if data!.paid {
+                        self.favoriteButton.tintColor = UIColor.label
+                        self.favoriteButton.isEnabled = true
+                    }
+                } else {
+                    if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                        vc.errorText = "updateNavBarButtons() @ SearchController.swift in else data nil block"
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "updateNavBarButtons() @ SearchController.swift in failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 }
@@ -105,6 +146,46 @@ extension SearchController {
                 }
             }
             reloadSearchResults(with: filtered, animatingDifferences: false)
+        }
+    }
+    
+    func networkService() {
+        Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).addSnapshotListener { document, error in
+            let result = Result {
+                try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if let data = data {
+                    if !data.paid {
+                        self.sections = NetworkService.FreeControllers.SearchController
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [8]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadSearchResults(with: self.sections, animatingDifferences: false)
+                    } else if data.paid {
+                        self.sections = NetworkService.SearchSections
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [9]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadSearchResults(with: self.sections, animatingDifferences: false)
+                    } else {
+                        if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                            vc.errorText = "viewDidLoad() @ StageController.swift in else block of success case"
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "viewDidLoad() @ StageController.swift in .failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
     }
 }
