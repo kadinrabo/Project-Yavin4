@@ -5,7 +5,6 @@
 //  Created by Kadin Rabo on 5/16/21.
 //
 
-import Foundation
 import UIKit
 import Firebase
 
@@ -38,26 +37,31 @@ class Helper {
     // ####################################################
     //MARK: SORT "FOR YOU" SECTION METHOD(S)
     // ####################################################
-    
-    static let early = 1...800
-    static let mid = 800...801
-    static let late = 801...802
-    static let more = 802...803
+
+    static let stage1 = 0...14  // 0-2 weeks
+    static let stage2 = 15...56  // 2-8 weeks
+    static let stage3 = 16...84  // 8-12 weeks
+    static let stage4 = 85...140  // 12-20 weeks
+    static let stage5 = 141...224  // 20-32 weeks
+    static let stage6 = 225...350  // 32-50 weeks
     
     static func stageFromDateSinceSurgery(dss: Int) -> String {
-        if early.contains(dss) {
-            return "early"
-        } else if mid.contains(dss) {
-            return "mid"
-        } else if late.contains(dss) {
-            return "late"
-        } else if more.contains(dss) {
-            return "more"
+        if stage1.contains(dss) {
+            return "stage1"
+        } else if stage2.contains(dss) {
+            return "stage2"
+        } else if stage3.contains(dss) {
+            return "stage3"
+        } else if stage4.contains(dss) {
+            return "stage4"
+        } else if stage5.contains(dss) {
+            return "stage5"
+        } else {
+            return "stage6"  // Forces the user into Stage 6 if they've had the account for a long time
         }
-        return ""
     }
     
-    static func getThreeItems(searchData: [Item], dssString: String) -> [Item]? {
+    static func getForYouItems(searchData: [Item], dssString: String) -> [Item]? {
         var items = [Item]()
         for i in 0..<searchData.count {
             if searchData[i].stage! == dssString {
@@ -65,11 +69,14 @@ class Helper {
             }
         }
         items.shuffle()
-        if items.count < 3 {
+        if items.isEmpty {  // catches array count 0
             return nil
         }
-        items = Array(items[0...2])
-        return items
+        if items.count >= 3 {  // catches array count 3 and greater
+            return Array(items[0...2])
+        } else {  // catches array count 1, 2
+            return Array(items[0..<searchData.count])
+        }
     }
     
     // ####################################################
@@ -93,8 +100,16 @@ class Helper {
         return ac
     }
     
+    static func quitApp(title: String!, message: String!) -> UIAlertController {
+        let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+            exit(1)
+        }))
+        return ac
+    }
+    
     // ####################################################
-    //MARK: SORT NETWORK WORKOUT SECTIONS METHOD(S)
+    //MARK: GET WORKOUT SECTIONS METHOD(S)
     // ####################################################
     
     static func getWorkoutSections(with identifier: String) -> [Section] {
@@ -103,6 +118,17 @@ class Helper {
         for i in 0..<NetworkService.WorkoutSections.count {  // Potential issue for too many workouts
             if NetworkService.WorkoutSections[i].identifier == identifier {
                 sections.append(NetworkService.WorkoutSections[i])
+            }
+        }
+        return sections
+    }
+    
+    static func getFreeWorkoutSections(with identifier: String) -> [Section] {
+        var sections = [Section]()
+        
+        for i in 0..<NetworkService.FreeControllers.WorkoutController.count {  // Potential issue for too many workouts
+            if NetworkService.FreeControllers.WorkoutController[i].identifier == identifier {
+                sections.append(NetworkService.FreeControllers.WorkoutController[i])
             }
         }
         return sections
