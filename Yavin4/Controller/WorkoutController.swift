@@ -19,6 +19,7 @@ import FirebaseFirestoreSwift
 class WorkoutController: UICollectionViewController {
     
     @IBOutlet var bookmarkButton: UIBarButtonItem!  // Bookmark button outlet for changing fill
+    @IBOutlet var downButton: UIBarButtonItem!
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
@@ -56,9 +57,9 @@ class WorkoutController: UICollectionViewController {
 extension WorkoutController {
     
     func setBookmarkFill() {
-        let savedRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)
+        let userRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)
         
-        savedRef.getDocument { (document, error) in
+        userRef.getDocument { (document, error) in
             let result = Result {
               try document?.data(as: User.self)  // Tries to convert the user document to User object
             }
@@ -84,10 +85,11 @@ extension WorkoutController {
             }
         }
     }
+    
     @IBAction func save(_ sender: UIButton) {
-        let savedRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)  // Reference the user document
+        let userRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)  // Reference the user document
         
-        savedRef.getDocument { (document, error) in  // Convert user document to User object
+        userRef.getDocument { (document, error) in  // Convert user document to User object
             let result = Result {
               try document?.data(as: User.self)
             }
@@ -95,7 +97,7 @@ extension WorkoutController {
             case .success(let data):
                 if let data = data {
                     if data.identifiers.contains(self.identifier) {  // If the identifier is contained in the user document
-                        savedRef.updateData([  // Remove the workout because the workout is contained
+                        userRef.updateData([  // Remove the workout because the workout is contained
                             "saved": FieldValue.arrayRemove([
                                 [
                                     "title":self.workoutTitle,
@@ -109,7 +111,7 @@ extension WorkoutController {
                         ])
                         self.bookmarkButton.image = UIImage(systemName: "bookmark")  // Set bookmark fill
                     } else if !data.identifiers.contains(self.identifier) {  // Add the workout
-                        savedRef.updateData([
+                        userRef.updateData([
                             "saved": FieldValue.arrayUnion([
                                 [
                                     "title":self.workoutTitle,
@@ -141,6 +143,10 @@ extension WorkoutController {
                 }
             }
         }
+    }
+    
+    @IBAction func downArrowPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
