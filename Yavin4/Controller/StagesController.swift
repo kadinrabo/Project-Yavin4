@@ -7,6 +7,9 @@
 
 import UIKit
 import SafariServices
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 // ######################################################
@@ -15,27 +18,24 @@ import SafariServices
 
 class StagesController: UICollectionViewController {
     
+    @IBOutlet var favoriteButton: UIBarButtonItem!
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>!  // Data source for configured cells
-    var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()  // Empty data source snapshot
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Configure View
-        configureHierarchy()  // Configure layout
-        createDataSource()  // Configure sections as reusable cells
         title = "Stages"
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.favoriteButton.tintColor = UIColor.clear
+        self.favoriteButton.isEnabled = false
+        configureHierarchy()  // Configure layout
+        createDataSource()  // Configure sections as reusable cells
+        updateNavBarButtons()
         
         // Network Service
-        sections = NetworkService.StagesSections
-        if sections.isEmpty {
-            let ac = Helper.createAlert(title: "Error", message: "Error getting sections @ StagesController.")
-            present(ac, animated: true)
-            return
-        }
-        reloadData()
+        networkService()
     }
 }
 
@@ -64,6 +64,7 @@ extension StagesController {
         } else if itemType == "Workout" && identifier != nil && title != nil, let vc = self.storyboard?.instantiateViewController(withIdentifier: "Workout") as? WorkoutController {  // Shows workout view if the item contains identifier and a title
             vc.workoutIdentifier = identifier
             vc.title = title
+            vc.downButton.tintColor = UIColor.label
             self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
         } else if itemType == "Article" && urlString != nil {  // Shows safari article view
             let url = URL(string: urlString!)
@@ -78,16 +79,96 @@ extension StagesController {
 }
 
 // ######################################################
+//MARK: BUTTON DELEGATE METHOD(S)
+// ######################################################
+
+extension StagesController {
+    
+    func updateNavBarButtons() {
+        let userRef = Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid)
+        
+        userRef.getDocument { document, error in
+            let result = Result {
+              try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if data != nil {
+                    if !data!.paid {
+                        self.favoriteButton.tintColor = UIColor.clear
+                        self.favoriteButton.isEnabled = false
+                    } else if data!.paid {
+                        self.favoriteButton.tintColor = UIColor.label
+                        self.favoriteButton.isEnabled = true
+                    }
+                } else {
+                    if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                        vc.errorText = "updateNavBarButtons() @ StagesController.swift in else data nil block"
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "updateNavBarButtons() @ StagesController.swift in failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+}
+
+// ######################################################
 //MARK: DATA DELEGATE
 // ######################################################
 
 extension StagesController {
     
     func reloadData() {  // Apply sections and items to the snapshot and then to the datasource
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()  // Empty data source snapshot
         snapshot.appendSections(sections)
         for section in sections {
             snapshot.appendItems(section.data!, toSection: section)
         }
         dataSource?.apply(snapshot)
+    }
+    
+    func networkService() {
+        Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).addSnapshotListener { document, error in
+            let result = Result {
+                try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if let data = data {
+                    if !data.paid {
+                        self.sections = NetworkService.FreeControllers.StagesController
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [1]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadData()
+                    } else if data.paid {
+                        self.sections = NetworkService.StagesSections
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [2]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadData()
+                    } else {
+                        if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                            vc.errorText = "viewDidLoad() @ StagesController.swift in else block of success case"
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "viewDidLoad() @ StagesController.swift in .failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
 }
