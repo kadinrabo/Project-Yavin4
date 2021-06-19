@@ -12,7 +12,18 @@ import Foundation
 //MARK: BASE MODEL(S)
 // ######################################################
 
+struct Free: Hashable, Codable {
+    let HomeController: [Section]
+    let StagesController: [Section]
+    let StageController: Stages
+    let WorkoutController: [Section]
+    let SettingsController: [Section]
+    let SavedController: [Section]
+    let SearchController: [Section]
+}
+
 struct Controllers: Hashable, Codable {
+    let FreeControllers: Free
     let HomeController: [Section]
     let StagesController: [Section]
     let StageController: Stages
@@ -23,7 +34,7 @@ struct Controllers: Hashable, Codable {
 }
 
 struct Section: Hashable, Codable {
-    let type: String  // Only non optional property
+    let type: String?
     let identifier: String?
     let title: String?
     let subtitle: String?
@@ -46,10 +57,12 @@ struct Item: Hashable, Codable {
 // ######################################################
 
 struct Stages: Hashable, Codable {
-    let EarlyStage: [Section]
-    let MidStage: [Section]
-    let LateStage: [Section]
-    let More: [Section]
+    let Weeks_0_2: [Section]  // 0-2 weeks
+    let Weeks_2_8: [Section]  // 2-8 weeks
+    let Weeks_8_12: [Section]  // 8-12 weeks
+    let Weeks_12_20: [Section]  // 12-20 weeks
+    let Weeks_20_32: [Section] // 20-32 weeks
+    let Weeks_32_50: [Section]  // 32-50 weeks
 }
 
 // ######################################################
@@ -60,4 +73,13 @@ struct User: Hashable, Codable {
     let identifiers: [String]  // Saved item identifier arrays
     let saved: [Item]  // Saved items
     let dss: Int
+    let paid: Bool
+}
+
+// ######################################################
+//MARK: PURCHASING IDENTIFIER(S)
+// ######################################################
+
+enum Product: String, CaseIterable {
+    case paid = "com.example.Yavin4.paid"
 }
