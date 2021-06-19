@@ -13,7 +13,7 @@
         <!--Home-->
         <scene sceneID="Ax3-FD-FEc">
             <objects>
-                <collectionViewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IDZ-S1-6ho" userLabel="Home" customClass="HomeController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IDZ-S1-6ho" userLabel="Home" customClass="HomeController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GV4-zQ-Vd8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,12 +40,19 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="aEG-dE-yXz">
-                        <barButtonItem key="leftBarButtonItem" title="Account" image="person.fill" catalog="system" id="7PM-jd-oRX">
-                            <color key="tintColor" systemColor="labelColor"/>
-                            <connections>
-                                <segue destination="3yV-2C-OpU" kind="show" id="Ym2-im-V3L"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Account" image="person.fill" catalog="system" id="7PM-jd-oRX">
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <connections>
+                                    <segue destination="3yV-2C-OpU" kind="show" id="Ym2-im-V3L"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Upgrade" id="83z-pM-Hbz">
+                                <connections>
+                                    <segue destination="4Mh-BK-TVV" kind="presentation" id="a9J-Zq-tFz"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Bookmark" image="bookmark.fill" catalog="system" id="yl2-p1-RL9">
                             <color key="tintColor" systemColor="labelColor"/>
                             <connections>
@@ -53,10 +60,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoriteButton" destination="yl2-p1-RL9" id="R9u-Vi-zAo"/>
+                        <outlet property="upgradeButton" destination="83z-pM-Hbz" id="7OK-bD-fhr"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mri-b0-zdQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-100113" y="-1061"/>
+            <point key="canvasLocation" x="-98292.753623188415" y="-1061.3839285714284"/>
         </scene>
         <!--Home Navigation-->
         <scene sceneID="mZD-aG-anM">
@@ -76,12 +87,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0L9-TW-Va2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-101167" y="-1061"/>
+            <point key="canvasLocation" x="-99347.826086956527" y="-1061.3839285714284"/>
         </scene>
         <!--Stages-->
         <scene sceneID="ecu-mt-Fif">
             <objects>
-                <collectionViewController storyboardIdentifier="Stages" id="9yb-XA-Gyz" userLabel="Stages" customClass="StagesController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Stages" id="9yb-XA-Gyz" userLabel="Stages" customClass="StagesController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8vJ-jB-jLx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,6 +132,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoriteButton" destination="c7I-PK-OQ2" id="JkB-nh-iWp"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVX-Kt-KeU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,7 +143,7 @@
         <!--Landing Controller-->
         <scene sceneID="p5b-yl-P19">
             <objects>
-                <viewController storyboardIdentifier="Landing" interfaceStyle="dark" id="a7D-AT-WOf" customClass="LandingController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Landing" interfaceStyle="dark" id="a7D-AT-WOf" customClass="LandingController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2d6-xe-kpM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,7 +199,7 @@
         <!--Sign Up Controller-->
         <scene sceneID="vdt-t9-2D9">
             <objects>
-                <viewController interfaceStyle="dark" id="4hm-eb-M2N" customClass="SignUpController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController interfaceStyle="dark" id="4hm-eb-M2N" customClass="SignUpController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yIC-Gh-ujd">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -270,7 +284,7 @@
         <!--Login Controller-->
         <scene sceneID="ee6-Z5-YAU">
             <objects>
-                <viewController interfaceStyle="dark" id="pNR-N4-F7t" customClass="LoginController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController interfaceStyle="dark" id="pNR-N4-F7t" customClass="LoginController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cfQ-WH-H3S">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -344,7 +358,7 @@
         <!--Search Controller-->
         <scene sceneID="NvV-Vp-Gm3">
             <objects>
-                <collectionViewController storyboardIdentifier="Search" interfaceStyle="dark" id="aCB-PS-v1Y" customClass="SearchController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Search" interfaceStyle="dark" id="aCB-PS-v1Y" customClass="SearchController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Cxp-4t-ugc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,10 +398,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoriteButton" destination="7en-u9-R1e" id="QEM-mQ-tgc"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="32Q-BY-eUJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-96552" y="-1061"/>
+            <point key="canvasLocation" x="-94731.884057971023" y="-1061.3839285714284"/>
         </scene>
         <!--Home Tab Bar-->
         <scene sceneID="XVB-d2-Jys">
@@ -408,12 +425,12 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xYc-9V-t9E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98768" y="-1061"/>
+            <point key="canvasLocation" x="-96947.826086956527" y="-1061.3839285714284"/>
         </scene>
         <!--Settings Controller-->
         <scene sceneID="Mq4-0u-jFn">
             <objects>
-                <collectionViewController storyboardIdentifier="Settings" interfaceStyle="dark" id="ag0-LQ-ckG" customClass="SettingsController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Settings" interfaceStyle="dark" id="ag0-LQ-ckG" customClass="SettingsController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WBA-YO-t4D">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,10 +457,16 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="ObG-EE-MSj">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="cfG-7W-b33">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="cfG-7W-b33">
                             <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
                                 <action selector="logOutPressed:" destination="ag0-LQ-ckG" id="pb7-qg-L8l"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="chevron.down" catalog="system" id="1WT-Jh-F3X">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="downButtonPressed:" destination="ag0-LQ-ckG" id="snz-VW-3VT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -455,7 +478,7 @@
         <!--Workout Controller-->
         <scene sceneID="wKt-6h-HbU">
             <objects>
-                <collectionViewController storyboardIdentifier="Workout" interfaceStyle="dark" id="NlQ-aF-lko" customClass="WorkoutController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Workout" interfaceStyle="dark" id="NlQ-aF-lko" customClass="WorkoutController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2WL-Yz-aUR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -482,6 +505,12 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="ZFY-z7-ymN">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.down" catalog="system" id="Wns-OL-DKu">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="downArrowPressed:" destination="NlQ-aF-lko" id="IeT-yF-kIw"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Play" image="play.fill" catalog="system" id="NF1-sZ-Wnj">
                                 <color key="tintColor" systemColor="labelColor"/>
@@ -498,7 +527,8 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="bookmarkButton" destination="rcY-mx-f61" id="y0j-Xq-i10"/>
+                        <outlet property="bookmarkButton" destination="rcY-mx-f61" id="Qab-an-UVh"/>
+                        <outlet property="downButton" destination="Wns-OL-DKu" id="S9W-Np-awk"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hsi-E2-9Hy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -508,7 +538,7 @@
         <!--Error Controller-->
         <scene sceneID="z2m-MK-GpE">
             <objects>
-                <viewController storyboardIdentifier="Error" interfaceStyle="dark" id="AoR-Dr-Ya6" customClass="ErrorController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Error" interfaceStyle="dark" id="AoR-Dr-Ya6" customClass="ErrorController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VDG-PX-RqP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -576,7 +606,7 @@
         <!--Saved Controller-->
         <scene sceneID="dua-pH-rmk">
             <objects>
-                <collectionViewController storyboardIdentifier="Bookmark" interfaceStyle="dark" id="VmZ-Vk-60F" customClass="SavedController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Bookmark" interfaceStyle="dark" id="VmZ-Vk-60F" customClass="SavedController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rH0-OB-iOo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -603,6 +633,12 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="cfH-Ab-D6q">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.down" catalog="system" id="4mf-Cf-6gE">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="addWorkoutButtonPressed:" destination="VmZ-Vk-60F" id="I6F-2S-ySp"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add Workout" id="WIb-TJ-5IA">
                             <color key="tintColor" systemColor="secondaryLabelColor"/>
                             <connections>
@@ -621,7 +657,7 @@
         <!--Forgot Password Controller-->
         <scene sceneID="Z4P-2c-8uw">
             <objects>
-                <viewController storyboardIdentifier="Forgot" interfaceStyle="dark" id="jCi-Ob-0rv" customClass="ForgotPasswordController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Forgot" interfaceStyle="dark" id="jCi-Ob-0rv" customClass="ForgotPasswordController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YnA-jx-QvA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -712,7 +748,7 @@
         <!--Stage Controller-->
         <scene sceneID="Dz9-Jl-U5Z">
             <objects>
-                <collectionViewController storyboardIdentifier="Stage" useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="dark" id="Uss-u3-Ub4" customClass="StageController" customModule="sundari" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="Stage" useStoryboardIdentifierAsRestorationIdentifier="YES" interfaceStyle="dark" id="Uss-u3-Ub4" customClass="StageController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6AF-Z7-sXo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -778,7 +814,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3bh-Oh-7qM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97530" y="-1061"/>
+            <point key="canvasLocation" x="-95710.144927536239" y="-1061.3839285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EnB-Fj-oo0">
@@ -819,16 +855,163 @@
             </objects>
             <point key="canvasLocation" x="-101168" y="445"/>
         </scene>
+        <!--Upgrade Controller-->
+        <scene sceneID="FVn-f1-CjM">
+            <objects>
+                <viewController interfaceStyle="dark" id="ktp-bF-BAZ" customClass="UpgradeController" customModule="Yavin4" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5hE-3c-nKP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAq-4G-RJd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="746"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JI8-Vo-rMI" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="800"/>
+                                        <subviews>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get access to Matt Midkiff's complete library of ACL workouts!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xXV-Lt-yHL">
+                                                <rect key="frame" x="30" y="20" width="354" height="223"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="354" id="DNM-oE-WOx"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="223" id="eUm-Nm-lY6"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="43"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9.99/month" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKA-AC-5tm">
+                                                <rect key="frame" x="30" y="273" width="354" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="AccentColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDK-NN-0t8">
+                                                <rect key="frame" x="95.5" y="323.5" width="223" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="223" id="0bG-bA-9Vw"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="MYm-kY-owk"/>
+                                                    <constraint firstAttribute="height" constant="50" id="R8b-SS-Mhm"/>
+                                                </constraints>
+                                                <state key="normal" title="Upgrade">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="buyPremiumPressed:" destination="ktp-bF-BAZ" eventType="touchUpInside" id="fbW-4P-axc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLR-RM-vbb">
+                                                <rect key="frame" x="293" y="403.5" width="91" height="30"/>
+                                                <state key="normal" title="Terms of Use">
+                                                    <color key="titleColor" systemColor="opaqueSeparatorColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="tOSPressed:" destination="ktp-bF-BAZ" eventType="touchUpInside" id="aqz-yC-l6G"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpd-fM-vEP">
+                                                <rect key="frame" x="30" y="403.5" width="95" height="30"/>
+                                                <state key="normal" title="Privacy Policy">
+                                                    <color key="titleColor" systemColor="opaqueSeparatorColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="privacyPolicyPressed:" destination="ktp-bF-BAZ" eventType="touchUpInside" id="v92-IA-YCD"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="800" id="1VR-F0-Nd5"/>
+                                            <constraint firstItem="kLR-RM-vbb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jpd-fM-vEP" secondAttribute="trailing" constant="30" id="6wI-Qu-QSv"/>
+                                            <constraint firstItem="fKA-AC-5tm" firstAttribute="trailing" secondItem="xXV-Lt-yHL" secondAttribute="trailing" id="Jdz-Xx-70y"/>
+                                            <constraint firstItem="xXV-Lt-yHL" firstAttribute="top" secondItem="JI8-Vo-rMI" secondAttribute="top" constant="20" id="Lbq-cG-eH7"/>
+                                            <constraint firstAttribute="trailing" secondItem="kLR-RM-vbb" secondAttribute="trailing" constant="30" id="M2f-YO-Pwf"/>
+                                            <constraint firstItem="fKA-AC-5tm" firstAttribute="leading" secondItem="xXV-Lt-yHL" secondAttribute="leading" id="TrM-X3-dJg"/>
+                                            <constraint firstItem="fKA-AC-5tm" firstAttribute="centerX" secondItem="xXV-Lt-yHL" secondAttribute="centerX" id="TuB-VF-A1c"/>
+                                            <constraint firstItem="jpd-fM-vEP" firstAttribute="leading" secondItem="JI8-Vo-rMI" secondAttribute="leading" constant="30" id="WEa-7E-GoS"/>
+                                            <constraint firstItem="kLR-RM-vbb" firstAttribute="centerY" secondItem="jpd-fM-vEP" secondAttribute="centerY" id="Z3t-ip-9bC"/>
+                                            <constraint firstAttribute="trailing" secondItem="xXV-Lt-yHL" secondAttribute="trailing" constant="30" id="Zmh-gs-Yu3"/>
+                                            <constraint firstItem="MDK-NN-0t8" firstAttribute="centerX" secondItem="JI8-Vo-rMI" secondAttribute="centerX" id="d56-Ea-lGv"/>
+                                            <constraint firstItem="MDK-NN-0t8" firstAttribute="top" secondItem="fKA-AC-5tm" secondAttribute="bottom" constant="30" id="dM0-Vn-bbc"/>
+                                            <constraint firstItem="jpd-fM-vEP" firstAttribute="top" secondItem="MDK-NN-0t8" secondAttribute="bottom" constant="30" id="ei7-nG-yYV"/>
+                                            <constraint firstItem="xXV-Lt-yHL" firstAttribute="leading" secondItem="JI8-Vo-rMI" secondAttribute="leading" constant="30" id="hln-AV-03K"/>
+                                            <constraint firstItem="kLR-RM-vbb" firstAttribute="width" secondItem="jpd-fM-vEP" secondAttribute="width" multiplier="0.957895" id="iAT-Vs-twx"/>
+                                            <constraint firstItem="fKA-AC-5tm" firstAttribute="top" secondItem="xXV-Lt-yHL" secondAttribute="bottom" constant="30" id="kKF-Uo-dw5"/>
+                                            <constraint firstItem="kLR-RM-vbb" firstAttribute="width" secondItem="jpd-fM-vEP" secondAttribute="height" multiplier="91:30" id="rSY-KI-PG5"/>
+                                            <constraint firstItem="kLR-RM-vbb" firstAttribute="height" secondItem="jpd-fM-vEP" secondAttribute="height" id="x02-xe-GaM"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="JI8-Vo-rMI" secondAttribute="bottom" id="AAv-h8-KOi"/>
+                                    <constraint firstItem="JI8-Vo-rMI" firstAttribute="top" secondItem="hAq-4G-RJd" secondAttribute="top" id="AFl-IA-UwY"/>
+                                    <constraint firstAttribute="trailing" secondItem="JI8-Vo-rMI" secondAttribute="trailing" id="Jlx-5m-cek"/>
+                                    <constraint firstItem="JI8-Vo-rMI" firstAttribute="leading" secondItem="hAq-4G-RJd" secondAttribute="leading" id="d0G-rA-hxm"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ufc-ve-xag"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hAq-4G-RJd" firstAttribute="leading" secondItem="Ufc-ve-xag" secondAttribute="leading" id="1kW-mB-Jp7"/>
+                            <constraint firstAttribute="bottom" secondItem="hAq-4G-RJd" secondAttribute="bottom" id="BBU-vT-kM1"/>
+                            <constraint firstItem="hAq-4G-RJd" firstAttribute="top" secondItem="5hE-3c-nKP" secondAttribute="top" id="McL-fm-oIF"/>
+                            <constraint firstItem="hAq-4G-RJd" firstAttribute="trailing" secondItem="Ufc-ve-xag" secondAttribute="trailing" id="Pod-EC-82M"/>
+                            <constraint firstItem="JI8-Vo-rMI" firstAttribute="width" secondItem="5hE-3c-nKP" secondAttribute="width" id="vHC-Nz-rMF"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Hwh-Lg-Jn1">
+                        <barButtonItem key="leftBarButtonItem" image="chevron.down" catalog="system" id="1ra-O1-pNN">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="escapePressed:" destination="ktp-bF-BAZ" id="kgm-MS-Cww"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Help" id="7aV-gq-jbG">
+                            <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="helpButtonPressed:" destination="ktp-bF-BAZ" id="2fz-5d-y5M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <size key="freeformSize" width="414" height="800"/>
+                    <connections>
+                        <outlet property="buyPremiumButton" destination="MDK-NN-0t8" id="8aa-JL-OZG"/>
+                        <outlet property="costLabel" destination="fKA-AC-5tm" id="PNO-CG-Yle"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Czt-VD-rL7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-100114" y="-1094"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rO4-1N-WKl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="dark" id="4Mh-BK-TVV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XeZ-aQ-rrE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ktp-bF-BAZ" kind="relationship" relationship="rootViewController" id="2Ga-Ld-jpN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDA-5C-hjI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-100999" y="-1061"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NVq-gZ-nA7"/>
-        <segue reference="SZY-25-uRH"/>
+        <segue reference="SKH-lZ-REb"/>
+        <segue reference="Ym2-im-V3L"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bolt.fill" catalog="system" width="101" height="128"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="chart.bar.doc.horizontal" catalog="system" width="115" height="128"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>
@@ -837,6 +1020,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="opaqueSeparatorColor">
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
