@@ -60,11 +60,11 @@ extension HomeController {
 
         let layoutGroupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.60),
-            heightDimension: .fractionalHeight(0.50))
+            heightDimension: .fractionalHeight(0.40))
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitems: [layoutItem])
 
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.orthogonalScrollingBehavior = .groupPaging
         layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         return layoutSection
     }
@@ -121,7 +121,7 @@ extension HomeController {
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 1)
 
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.orthogonalScrollingBehavior = .groupPaging
         
         let layoutSectionHeader = createSectionHeader()
         layoutSection.boundarySupplementaryItems = [layoutSectionHeader]

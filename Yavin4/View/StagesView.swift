@@ -68,7 +68,7 @@ extension StagesController {
         let top = NSCollectionLayoutGroup.horizontal(layoutSize: topSize, subitems: [leftItem, rightItem])
 
         let layoutSection = NSCollectionLayoutSection(group: top)
-        layoutSection.orthogonalScrollingBehavior = .continuous
+        layoutSection.orthogonalScrollingBehavior = .groupPaging
         layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         return layoutSection
     }
@@ -86,7 +86,7 @@ extension StagesController {
         let layoutGroup = NSCollectionLayoutGroup.horizontal(layoutSize: layoutGroupSize, subitem: layoutItem, count: 1)
         
         let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
-        layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+        layoutSection.orthogonalScrollingBehavior = .groupPaging
         layoutSection.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
         return layoutSection
     }
