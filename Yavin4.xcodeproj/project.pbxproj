@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E02BD1CF9CCF192C4B645352 /* Pods_Yavin4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD0F60ED8307D197E2D2645 /* Pods_Yavin4.framework */; };
 		F674961B26685E7A00C3B746 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F674961A26685E7A00C3B746 /* README.md */; };
+		F6D0083D2673F12100D52CD1 /* UpgradeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0083C2673F12100D52CD1 /* UpgradeController.swift */; };
+		F6D0083F2673F6E200D52CD1 /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = F6D0083E2673F6E200D52CD1 /* Configuration.storekit */; };
 		F6F3869526674ECD006C81D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3869426674ECD006C81D7 /* AppDelegate.swift */; };
 		F6F3869726674ECD006C81D7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F3869626674ECD006C81D7 /* SceneDelegate.swift */; };
 		F6F3869E26674ECF006C81D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6F3869D26674ECF006C81D7 /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		6A7FD08798C331D3E4AADACC /* Pods-Yavin4.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yavin4.debug.xcconfig"; path = "Target Support Files/Pods-Yavin4/Pods-Yavin4.debug.xcconfig"; sourceTree = "<group>"; };
 		9DD0F60ED8307D197E2D2645 /* Pods_Yavin4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yavin4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F674961A26685E7A00C3B746 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F6D0083C2673F12100D52CD1 /* UpgradeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeController.swift; sourceTree = "<group>"; };
+		F6D0083E2673F6E200D52CD1 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		F6F3869126674ECD006C81D7 /* Yavin4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yavin4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6F3869426674ECD006C81D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6F3869626674ECD006C81D7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 		F6F3868826674ECD006C81D7 = {
 			isa = PBXGroup;
 			children = (
+				F6D0083E2673F6E200D52CD1 /* Configuration.storekit */,
 				F674961A26685E7A00C3B746 /* README.md */,
 				F6F3869326674ECD006C81D7 /* Yavin4 */,
 				F6F3869226674ECD006C81D7 /* Products */,
@@ -215,12 +220,13 @@
 				F6F386CB266750EC006C81D7 /* HomeController.swift */,
 				F6F386CC266750EC006C81D7 /* SettingsController.swift */,
 				F6F386CD266750EC006C81D7 /* StageController.swift */,
+				F6F386D3266750EC006C81D7 /* WorkoutController.swift */,
 				F6F386CE266750EC006C81D7 /* LoginController.swift */,
 				F6F386CF266750EC006C81D7 /* SearchController.swift */,
 				F6F386D0266750EC006C81D7 /* SignUpController.swift */,
 				F6F386D1266750EC006C81D7 /* SavedController.swift */,
 				F6F386D2266750EC006C81D7 /* ErrorController.swift */,
-				F6F386D3266750EC006C81D7 /* WorkoutController.swift */,
+				F6D0083C2673F12100D52CD1 /* UpgradeController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6D0083F2673F6E200D52CD1 /* Configuration.storekit in Resources */,
 				F674961B26685E7A00C3B746 /* README.md in Resources */,
 				F6F386AD266750D0006C81D7 /* Main.storyboard in Resources */,
 				F6F3869E26674ECF006C81D7 /* Assets.xcassets in Resources */,
@@ -369,6 +376,7 @@
 				F6F386E0266750EC006C81D7 /* SmallSliderCell.swift in Sources */,
 				F6F386F3266750EC006C81D7 /* WorkoutController.swift in Sources */,
 				F6F386ED266750EC006C81D7 /* StageController.swift in Sources */,
+				F6D0083D2673F12100D52CD1 /* UpgradeController.swift in Sources */,
 				F6F386D5266750EC006C81D7 /* Cell-Protocol.swift in Sources */,
 				F6F386D7266750EC006C81D7 /* Models.swift in Sources */,
 				F6F386DB266750EC006C81D7 /* MediumPanelCell.swift in Sources */,

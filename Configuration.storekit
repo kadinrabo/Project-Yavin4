@@ -1,0 +1,49 @@
+{
+  "identifier" : "5A1E9D32",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "FE2A39B4",
+      "localizations" : [
+
+      ],
+      "name" : "Paid Status",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "8ECC4AFC",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Get access to all workouts ",
+              "displayName" : "Paid Status",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.example.Yavin4.paid",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Paid Account",
+          "subscriptionGroupID" : "FE2A39B4",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}
