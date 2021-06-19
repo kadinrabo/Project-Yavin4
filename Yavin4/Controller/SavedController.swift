@@ -66,7 +66,8 @@ extension SavedController {
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "Workout") as? WorkoutController {
             vc.workoutIdentifier = identifier
             vc.title = title
-            self.navigationController?.pushViewController(vc, animated: true) // Push the workout up from bottom
+            vc.downButton.tintColor = UIColor.label
+            self.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
         } else {
             if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
                 vc.errorText = "didSelectItem() @ SavedController.swift in else block of WorkoutController instantiation"
