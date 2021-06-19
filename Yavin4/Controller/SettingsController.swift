@@ -7,6 +7,10 @@
 
 import UIKit
 import Firebase
+import StoreKit
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 
 // ######################################################
@@ -18,6 +22,7 @@ class SettingsController: UICollectionViewController {
     var sections = [Section]()
     var dataSource: UICollectionViewDiffableDataSource<Section, Item>! // Data source for configured cells
     var snapshot = NSDiffableDataSourceSnapshot<Section, Item>() // Data source snapshot
+    var accountStatusText: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +33,8 @@ class SettingsController: UICollectionViewController {
         configureHierarchy()
         createDataSource()
 
-        // Network Service
-        sections = NetworkService.SettingsSections
-        if sections.isEmpty {
-            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [12]")
-            present(ac, animated: true)
-            return
-        }
-        reloadData()
+        // Network Service and Set Account Status Text
+        networkService()
     }
 }
 
@@ -62,6 +61,10 @@ extension SettingsController {
             let ac = Helper.createAlert(title: "Account Email", message: Auth.auth().currentUser?.email) // Show user email
             collectionView.deselectItem(at: indexPath, animated: true)
             self.present(ac, animated: true)
+        } else if settingTitle == "Account Status" {
+            let ac = Helper.createAlert(title: "Account Status", message: accountStatusText)
+            self.collectionView.deselectItem(at: indexPath, animated: true)
+            self.present(ac, animated: true)
         } else {
             let ac = Helper.createAlert(title: "Error", message: "Error performing settings request. [16]")
             present(ac, animated: true)
@@ -86,6 +89,10 @@ extension SettingsController {
             return
         }
     }
+    
+    @IBAction func downButtonPressed(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // ######################################################
@@ -100,5 +107,47 @@ extension SettingsController {
             snapshot.appendItems(section.data!, toSection: section)
         }
         dataSource?.apply(snapshot)
+    }
+    
+    func networkService() {
+        Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).addSnapshotListener { document, error in
+            let result = Result {
+                try document?.data(as: User.self)
+            }
+            switch result {
+            case .success(let data):
+                if let data = data {
+                    if !data.paid {
+                        self.sections = NetworkService.FreeControllers.SettingsController
+                        self.accountStatusText = "Free"
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [4]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadData()
+                    } else if data.paid {
+                        self.sections = NetworkService.SettingsSections
+                        self.accountStatusText = "Paid"
+                        if self.sections.isEmpty {
+                            let ac = Helper.createAlert(title: "Error", message: "Error displaying data. [5]")
+                            self.present(ac, animated: true)
+                            return
+                        }
+                        self.reloadData()
+                    } else {
+                        if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                            vc.errorText = "viewDidLoad() @ SettingsController.swift in else block of success case"
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
+            case .failure(_):
+                if let vc = self.storyboard?.instantiateViewController(identifier: "Error") as? ErrorController {
+                    vc.errorText = "viewDidLoad() @ SettingsController.swift in .failure case block"
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
     }
 }
