@@ -72,7 +72,8 @@ extension SignUpController {
                     Firestore.firestore().collection("yavin4-users").document(Auth.auth().currentUser!.uid).setData([
                         "saved":[],
                         "identifiers":[],
-                        "dss":dss
+                        "dss":dss,
+                        "paid":false
                     ]) { error in  // Catches any possible errors. Not likely this block is reached
                         if error != nil {
                             let ac = Helper.createAlert(title: "Error", message: error?.localizedDescription)
