@@ -92,7 +92,5 @@ url | For articles in Resources section.
 # :art: Layout Documentation & Notes
 
 <p align="center">
-  <img src="https://drive.google.com/uc?export=view&id=1FUAWkOhOgUr4T8oKKIY24s7aitKOe-zc" width=600 height=800>
-  
-  <img src="https://drive.google.com/uc?export=view&id=1XgpnChRiOA31tKiOLrj7C2hs5HAWJNp_" width=600 height=800>
+  <img src="https://drive.google.com/uc?export=view&id=1UmEFcVcvbqeRBV7QlhQRIkannwk5jgOr" width=600 height=800>
 </p>
